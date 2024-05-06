@@ -24,7 +24,7 @@
               <option v-for="programa in programasUnicos" :key="programa" :value="programa">{{ programa }}</option>
         </select>
       </div>
-      <button @click="filtrar" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Buscar</button>
+      
     </div>
     <table class="w-full table-auto">
       <thead class="bg-gray-200">

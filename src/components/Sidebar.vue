@@ -122,7 +122,7 @@
             />
           </svg>
 
-          <span class="mx-4">Tables</span>
+          <span class="mx-4">Actividad 1</span>
         </router-link>
 
         <router-link
@@ -141,7 +141,7 @@
             />
           </svg>
 
-          <span class="mx-4">Forms</span>
+          <span class="mx-4">Actividad 2</span>
         </router-link>
 
         <router-link
