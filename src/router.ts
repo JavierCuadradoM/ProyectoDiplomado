@@ -49,7 +49,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: "/blank",
-    name: "Blank",
+    name: "blank aleatorio",
     component: Blank,
   },
 ];
