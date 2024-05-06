@@ -1,176 +1,163 @@
 <template>
-  <div>
-    <h3 class="text-3xl font-semibold text-gray-700">Forms</h3>
-
-    <div class="mt-4">
-      <h4 class="text-gray-600">Model Form</h4>
-
-      <div class="mt-4">
-        <div
-          class="w-full max-w-sm overflow-hidden bg-white border rounded-md shadow-md"
-        >
-          <form>
-            <div
-              class="flex items-center justify-between px-5 py-3 text-gray-700 border-b"
-            >
-              <h3 class="text-sm">Add Category</h3>
-              <button>
-                <svg
-                  class="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            <div class="px-5 py-6 text-gray-700 bg-gray-200 border-b">
-              <label class="text-xs">Name</label>
-
-              <div class="relative mt-2 rounded-md shadow-sm">
-                <span
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600"
-                >
-                  <svg
-                    class="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+  <div class="container mx-auto px-4 py-8">
+      <div class="flex justify-between items-center mb-4">
+          <div class="flex items-center space-x-4">
+              <label for="periodo" class="text-sm font-medium text-gray-700"
+                  >Periodo:</label
+              >
+              <select
+                  id="periodo"
+                  v-model="filtroPeriodo"
+                  class="border border-gray-300 rounded-md px-2 py-1 w-32"
+              >
+                  
+                  <option
+                      v-for="periodo in periodosUnicos"
+                      :key="periodo"
+                      :value="periodo"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-                    />
-                  </svg>
-                </span>
-
-                <input
-                  type="text"
-                  class="w-full px-12 py-2 border-transparent rounded-md appearance-none focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                />
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between px-5 py-3">
-              <button
-                class="px-3 py-1 text-sm text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none"
+                      {{ periodo }}
+                  </option>
+              </select>
+          </div>
+          <div class="flex items-center space-x-4">
+              <label for="programa" class="text-sm font-medium text-gray-700"
+                  >Genero:</label
               >
-                Cancel
-              </button>
-              <button
-                class="px-3 py-1 text-sm text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none"
+              <select
+                  id="programa"
+                  v-model="filtroTipo"
+                  class="border border-gray-300 rounded-md px-2 py-1 w-32"
               >
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+                  <option value="todos">Todos</option>
+                  <option value="mujeres">Mujeres</option>
+                  <option value="hombres">Hombres</option>
+              </select>
+          </div>
+          <button
+              @click="filtrar"
+              class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          >
+              Buscar
+          </button>
       </div>
-    </div>
-
-    <div class="mt-8">
-      <h4 class="text-gray-600">Forms</h4>
-
-      <div class="mt-4">
-        <div class="p-6 bg-white rounded-md shadow-md">
-          <h2 class="text-lg font-semibold text-gray-700 capitalize">
-            Account settings
-          </h2>
-
-          <form @submit.prevent="register">
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-gray-700" for="username">Username</label>
-                <input
-                  class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                  type="text"
-                  v-model="user.username"
-                />
-              </div>
-
-              <div>
-                <label class="text-gray-700" for="emailAddress"
-                  >Email Address</label
-                >
-                <input
-                  class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                  type="email"
-                  v-model="user.email"
-                />
-              </div>
-
-              <div>
-                <label class="text-gray-700" for="password">Password</label>
-                <input
-                  class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                  type="password"
-                  v-model="user.password"
-                />
-              </div>
-
-              <div>
-                <label class="text-gray-700" for="passwordConfirmation"
-                  >Password Confirmation</label
-                >
-                <input
-                  class="w-full mt-2 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-                  type="password"
-                  v-model="user.confirm"
-                />
-              </div>
-            </div>
-
-            <div class="flex justify-end mt-4">
-              <button
-                class="px-4 py-2 text-gray-200 bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-              >
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+      <div>
+          <canvas id="myChart"></canvas>
       </div>
-    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-
-interface User {
-  username: string;
-  email: string;
-  password: string;
-  confirm: string;
-}
-
-export default defineComponent({
-  setup() {
-    const user = ref<User>({
-      username: "",
-      email: "",
-      password: "",
-      confirm: "",
-    });
-
-    const register = () => {
-      const data = JSON.parse(JSON.stringify(user.value));
-      console.log("Registered: ", data);
-    };
-
-    return {
-      user,
-      register,
-    };
+<script>
+import axios from 'axios'
+import Chart from 'chart.js/auto';
+export default {
+  data() {
+      return {
+          datos: [],
+          items: [],
+          filtroPeriodo: '2017-1',
+          filtroTipo: 'todos',
+          myChart: null,
+      }
   },
-});
+  async created() {
+      try {
+          const response = await axios.get(
+              'https://www.datos.gov.co/resource/r86y-229a.json'
+          )
+          this.datos = response.data
+      } catch (error) {
+          console.error('Error al obtener los datos:', error)
+      }
+  },
+  computed: {
+      datosFiltrados() {
+          let filtro = this.datos
+          if (this.filtroPeriodo) {
+              filtro = filtro.filter(
+                  (fila) => fila.periodo === this.filtroPeriodo
+              )
+          }
+          return filtro
+      },
+      periodosUnicos() {
+          return [...new Set(this.datos.map((fila) => fila.periodo))]
+      },
+  },
+  methods: {
+      filtrar() {
+          let url = ' https://www.datos.gov.co/resource/r86y-229a.json'
+          if (this.filtroPeriodo !== '') {
+              url += `?periodo=${encodeURIComponent(this.filtroPeriodo)}`
+          }
+
+          axios
+              .get(url)
+              .then((result) => {
+                  this.items = result.data
+                  this.renderChart()
+              })
+              .catch((error) => {
+                  alert(error.message)
+              })
+      },
+      filterChartData() {
+          if (this.filtroTipo === 'todos') {
+              return this.items
+          } else if (this.filtroTipo === 'hombres') {
+              return this.items.filter((item) => item.sexo_masc !== '')
+          } else if (this.filtroTipo === 'mujeres') {
+              return this.items.filter((item) => item.sexo_feme !== '')
+          }
+      },
+      destroyChart() {
+          if (this.myChart) {
+              this.myChart.destroy()
+              this.myChart = null
+          }
+      },
+      renderChart() {
+          if (this.myChart) {
+              this.destroyChart()
+          }
+
+          const ctx = document.getElementById('myChart').getContext('2d')
+          const filteredData = this.filterChartData()
+
+          this.myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: filteredData.map((item) => item.programa),
+                  datasets: [
+                      {
+                          label:
+                              this.filtroTipo === 'todos'
+                                  ? 'Total Matriculados'
+                                  : `Total ${this.filtroTipo}`,
+                          data: filteredData.map((item) => {
+                              if (this.filtroTipo === 'todos') {
+                                  return item.total_matricula
+                              } else if (this.filtroTipo === 'hombres') {
+                                  return item.sexo_masc
+                              } else if (this.filtroTipo === 'mujeres') {
+                                  return item.sexo_feme
+                              }
+                          }),
+                          backgroundColor: 'rgba(48, 7, 87, 0.2)',
+                          borderColor: 'rgba(48, 7, 87, 1)',
+                          borderWidth: 1,
+                      },
+                  ],
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true,
+                      },
+                  },
+              },
+          })
+      },
+  },
+}
 </script>
